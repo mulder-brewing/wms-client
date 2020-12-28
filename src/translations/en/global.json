@@ -1,0 +1,9 @@
+{
+    "app": {
+        "title": "Mulder WMS"
+    },
+    "menu": {
+        "home": "Home",
+        "signup": "Sign Up"
+    }
+}
