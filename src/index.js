@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 
 import App from './App';
 
+import form_en from './translations/en/form.json';
 import global_en from './translations/en/global.json';
 
 import './index.css';
@@ -15,7 +16,8 @@ i18next.init({
   lng: 'en',
   resources: {
     en: {
-      global: global_en
+      global: global_en,
+      form: form_en
     }
   }
 });

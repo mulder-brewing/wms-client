@@ -35,7 +35,8 @@ const createMenuItem = (key, path) => ({
 
 const menuItems = [
     createMenuItem('menu.home', '/'),
-    createMenuItem('menu.signup', '/signup')
+    createMenuItem('menu.sign_in', '/signin'),
+    createMenuItem('menu.sign_up', '/signup')
 ];
 
 export default function ButtonAppBar() {

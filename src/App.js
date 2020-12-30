@@ -1,16 +1,18 @@
+import CssBaseline from '@material-ui/core/CssBaseline';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from 'react-router-dom';
 
 import AppBar from './components/AppBar';
+import SignIn from './containers/SignIn/SignIn';
 import SignUp from './containers/SignUp/SignUp';
 
 function App() {
   return (
     <Router>
+      <CssBaseline />
       <div>
         <AppBar />
         <Switch>
@@ -20,6 +22,7 @@ function App() {
             </div>
           </Route>
           <Route path="/signup" component={SignUp} />
+          <Route path="/signin" component={SignIn} />
         </Switch>
       </div>
     </Router>

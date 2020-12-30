@@ -1,0 +1,19 @@
+{
+    "shared": {
+        "auth": {
+            "username": "Username",
+            "password": "Password"
+        }
+    },
+    "signup": {
+        "sign_in_instead": "Already have an account? Sign in", 
+        "company": "Company",
+        "title": "Sign Up",
+        "validation": {
+            "password_complexity": "Must contain at least one each of [a-z], [A-Z], [0-9], and [!@#$%^&*]"
+        }
+    },
+    "validation": {
+        "minLength": "Must be at least {{minLength}} characters"
+    }
+}
