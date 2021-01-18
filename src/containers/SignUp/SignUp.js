@@ -1,3 +1,4 @@
+import { railsAxios } from '../../axios/railsAxios';
 import React from 'react';
 
 import Avatar from '@material-ui/core/Avatar';
@@ -10,10 +11,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 
-import { Link as RouterLink } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
 import { useTranslation } from "react-i18next";
-import axios from '../../axios';
+
+import { alertActions } from '../../store/alert';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -37,8 +40,12 @@ const useStyles = makeStyles((theme) => ({
 
 const SignUp = () => {
     const classes = useStyles();
-    const { register, handleSubmit, errors } = useForm();
-    const { t } = useTranslation('form');
+    const { register, handleSubmit, errors, formState } = useForm({
+        mode: 'onChange'
+    });
+    const { t } = useTranslation(['alert', 'form']);
+    const dispatch = useDispatch();
+    const history = useHistory();
 
     const onSubmit = async data => {
         const postData = {
@@ -50,8 +57,10 @@ const SignUp = () => {
                 password: data.password
             }
         };
-        const reponse = await axios.post('signup', postData);
-        console.log(reponse);
+        if (await railsAxios.post('signup', postData)) {
+            history.push('/signin');
+            dispatch(alertActions.success(t('alert:success.signed_up'), null));
+        }
     }
 
     return (
@@ -61,7 +70,7 @@ const SignUp = () => {
                     <LockOutlinedIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                    {t('signup.title')}
+                    {t('form:signup.title')}
                 </Typography>
                 <form
                     className={classes.form}
@@ -75,12 +84,13 @@ const SignUp = () => {
                     >
                         <Grid item>
                             <TextField
-                                error={!!errors.company}
+                                error={!!errors.company_name}
                                 fullWidth
+                                inputProps={{ maxLength: 50 }}
                                 inputRef={register({
                                     required: true
                                 })}
-                                label={t('signup.company')}
+                                label={t('form:signup.company')}
                                 name="company_name"
                                 required
                                 variant="outlined"
@@ -90,10 +100,11 @@ const SignUp = () => {
                             <TextField
                                 error={!!errors.username}
                                 fullWidth
+                                inputProps={{ maxLength: 50 }}
                                 inputRef={register({
                                     required: true
                                 })}
-                                label={t('shared.auth.username')}
+                                label={t('form:shared.auth.username')}
                                 name="username"
                                 required
                                 variant="outlined"
@@ -108,15 +119,15 @@ const SignUp = () => {
                                 inputRef={register({
                                     minLength: {
                                         value: 8,
-                                        message: t('validation.minLength', {minLength: 8})
+                                        message: t('form:validation.minLength', { minLength: 8 })
                                     },
                                     pattern: {
                                         value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/,
-                                        message: t('signup.validation.password_complexity')
+                                        message: t('form:signup.validation.password_complexity')
                                     },
                                     required: true
                                 })}
-                                label={t('shared.auth.password')}
+                                label={t('form:shared.auth.password')}
                                 name="password"
                                 required
                                 type="password"
@@ -127,11 +138,12 @@ const SignUp = () => {
                     <Button
                         className={classes.submit}
                         color="primary"
+                        disabled={formState.isSubmitted && !formState.isValid}
                         fullWidth
                         type="submit"
                         variant="contained"
                     >
-                        {t('signup.title')}
+                        {t('form:signup.title')}
                     </Button>
                     <Grid container justify="flex-end">
                         <Grid item>
@@ -140,7 +152,7 @@ const SignUp = () => {
                                 to="/signin" 
                                 variant="body2"
                             >
-                                {t('signup.sign_in_instead')}
+                                {t('form:signup.sign_in_instead')}
                             </Link>
                         </Grid>
                     </Grid>

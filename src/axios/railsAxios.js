@@ -1,5 +1,5 @@
 import axios from 'axios';
 
-export default axios.create({
+export const railsAxios = axios.create({
     baseURL:'http://0.0.0.0:3001'
 })
