@@ -40,7 +40,12 @@ const useStyles = makeStyles((theme) => ({
 
 const SignUp = () => {
     const classes = useStyles();
-    const { register, handleSubmit, errors, formState } = useForm({
+    const { 
+        errors, 
+        formState: { isSubmitted, isValid },
+        handleSubmit,
+        register
+    } = useForm({
         mode: 'onChange'
     });
     const { t } = useTranslation(['alert', 'form']);
@@ -63,13 +68,19 @@ const SignUp = () => {
         }
     }
 
+    console.log("isSubmitted", isSubmitted);
+    console.log("isValid", isValid);
+
     return (
         <Container maxWidth="xs">
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
                     <LockOutlinedIcon />
                 </Avatar>
-                <Typography component="h1" variant="h5">
+                <Typography 
+                    component="h1" 
+                    variant="h5"
+                >
                     {t('form:signup.title')}
                 </Typography>
                 <form
@@ -84,6 +95,7 @@ const SignUp = () => {
                     >
                         <Grid item>
                             <TextField
+                                autoFocus
                                 error={!!errors.company_name}
                                 fullWidth
                                 inputProps={{ maxLength: 50 }}
@@ -138,7 +150,7 @@ const SignUp = () => {
                     <Button
                         className={classes.submit}
                         color="primary"
-                        disabled={formState.isSubmitted && !formState.isValid}
+                        disabled={isSubmitted && !isValid}
                         fullWidth
                         type="submit"
                         variant="contained"

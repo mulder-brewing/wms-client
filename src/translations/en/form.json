@@ -5,6 +5,10 @@
             "password": "Password"
         }
     },
+    "signin": {
+        "sign_up_instead": "Don't have an account? Sign Up",
+        "title": "Sign In"
+    },
     "signup": {
         "sign_in_instead": "Already have an account? Sign in", 
         "company": "Company",
