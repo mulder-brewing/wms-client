@@ -1,5 +1,6 @@
 {
     "success": {
+        "signed_in": "Signed in successfully!",
         "signed_up": "Signed up successfully!  Please sign in."
     }
 }

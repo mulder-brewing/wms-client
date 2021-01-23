@@ -27,10 +27,10 @@ const success_alert = (title, message) => ({
         },
         message,
         snackbar_props: {
-            autoHideDuration: 5000,
+            autoHideDuration: 4000,
             anchorOrigin: {
-                vertical: 'bottom', 
-                horizontal: 'left'
+                vertical: 'top', 
+                horizontal: 'center'
             },
             open: true
         },

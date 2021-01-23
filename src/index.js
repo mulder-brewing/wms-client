@@ -11,6 +11,7 @@ import { alertActions } from './store/alert'
 import { railsAxios } from './axios/railsAxios';
 
 import alertReducer from './store/alert';
+import authReducer from './store/auth';
 
 import alert_en from './translations/en/alert.json';
 import form_en from './translations/en/form.json';
@@ -31,7 +32,8 @@ i18next.init({
 });
 
 const rootReducer = combineReducers({
-    alert: alertReducer
+    alert: alertReducer,
+    auth: authReducer
 });
 
 const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());

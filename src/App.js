@@ -7,6 +7,7 @@ import {
 
 import Alert from './components/Alert/Alert';
 import AppBar from './components/AppBar';
+import Home from './containers/Home/Home';
 import SignIn from './containers/SignIn/SignIn';
 import SignUp from './containers/SignUp/SignUp';
 
@@ -18,11 +19,7 @@ function App() {
                 <Alert />
                 <AppBar />
                 <Switch>
-                    <Route exact path="/">
-                        <div>
-                            <h2>Home</h2>
-                        </div>
-                    </Route>
+                    <Route exact path="/" component={Home} />
                     <Route path="/signup" component={SignUp} />
                     <Route path="/signin" component={SignIn} />
                 </Switch>
