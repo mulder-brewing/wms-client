@@ -1,4 +1,3 @@
-import { railsAxios } from '../../axios/railsAxios';
 import React from 'react';
 
 import Avatar from '@material-ui/core/Avatar';
@@ -12,12 +11,11 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
-import { Link as RouterLink, useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link as RouterLink, Redirect } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import { alertActions } from '../../store/alert';
-import { authActions } from '../../store/auth';
+import { authOperations, authSelectors } from '../../store/auth';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -41,6 +39,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn() {
     const classes = useStyles();
+    const dispatch = useDispatch();
+    const isSignedIn = useSelector(authSelectors.isSignedIn);
+    const onSubmit = data => dispatch(authOperations.signIn(data.username, data.password));
+    const { t } = useTranslation(['form']);
     const {  
         errors, 
         formState: { isSubmitted, isValid },
@@ -49,29 +51,10 @@ export default function SignIn() {
     } = useForm({
         mode: 'onChange'
     });
-    const { t } = useTranslation(['form']);
-    const dispatch = useDispatch();
-    const history = useHistory();
-
-    const onSubmit = async data => {
-        const postData = {
-            username: data.username,
-            password: data.password
-        };
-        const response = await railsAxios.post('login', postData);
-        if (response) {
-            const token = response.data.token;
-            const expiration = response.data.expiration;
-            dispatch(authActions.signed_in(token, expiration));
-            localStorage.setItem('token', token);
-            localStorage.setItem('expiration', expiration);
-            history.push('/');
-            dispatch(alertActions.success(t('alert:success.signed_in'), null));
-        }
-    }
-
+    
     return (
         <Container maxWidth="xs">
+            { isSignedIn ? <Redirect to="/" /> : null }
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
                     <LockOutlinedIcon />

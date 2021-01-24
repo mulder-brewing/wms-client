@@ -3,7 +3,8 @@ import { I18nextProvider } from "react-i18next";
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, combineReducers } from 'redux';
+import { applyMiddleware, compose, createStore, combineReducers } from 'redux';
+import thunk from 'redux-thunk';
 import reportWebVitals from './reportWebVitals';
 
 import App from './App';
@@ -36,7 +37,15 @@ const rootReducer = combineReducers({
     auth: authReducer
 });
 
-const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const storeEnhancers = composeEnhancers(
+    applyMiddleware(thunk)
+);
+
+const store = createStore(
+    rootReducer, 
+    storeEnhancers
+);
 
 ReactDOM.render(
     <I18nextProvider i18n={i18next}>

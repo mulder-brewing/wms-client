@@ -1,8 +1,8 @@
 import * as types from './types';
 
 const initialState = {
-    token: null,
-    expiration: null
+    isSignedIn: false,
+    user: null
 };
 
 const authReducer = (state = initialState, action) => {
@@ -10,8 +10,8 @@ const authReducer = (state = initialState, action) => {
         case types.SIGNED_IN:
             return {
                 ...state,
-                token: action.token,
-                expiration: action.expiration
+                isSignedIn: true,
+                user: action.user
             }
         default:
             return state;
