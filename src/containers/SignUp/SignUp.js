@@ -1,4 +1,3 @@
-import { railsAxios } from '../../axios/railsAxios';
 import React from 'react';
 
 import Avatar from '@material-ui/core/Avatar';
@@ -12,11 +11,11 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
-import { Link as RouterLink, useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link as RouterLink, Redirect } from 'react-router-dom';
 import { useTranslation } from "react-i18next";
 
-import { alertActions } from '../../store/alert';
+import { authOperations, authSelectors } from '../../store/auth';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -50,29 +49,21 @@ const SignUp = () => {
     });
     const { t } = useTranslation(['alert', 'form']);
     const dispatch = useDispatch();
-    const history = useHistory();
+    const isSignedUp = useSelector(authSelectors.isSignedUp);
 
-    const onSubmit = async data => {
-        const postData = {
-            company: {
-                name: data.company_name
-            },
-            user: {
-                username: data.username,
-                password: data.password
-            }
-        };
-        if (await railsAxios.post('signup', postData)) {
-            history.push('/signin');
-            dispatch(alertActions.success(t('alert:success.signed_up'), null));
+    const onSubmit = async data => dispatch(authOperations.signUp({
+        company: {
+            name: data.company_name
+        },
+        user: {
+            username: data.username,
+            password: data.password
         }
-    }
-
-    console.log("isSubmitted", isSubmitted);
-    console.log("isValid", isValid);
+    }));
 
     return (
         <Container maxWidth="xs">
+            { isSignedUp && <Redirect to="/signin" /> }
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
                     <LockOutlinedIcon />

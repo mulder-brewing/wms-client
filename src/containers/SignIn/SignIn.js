@@ -41,6 +41,7 @@ export default function SignIn() {
     const classes = useStyles();
     const dispatch = useDispatch();
     const isSignedIn = useSelector(authSelectors.isSignedIn);
+    const isSignedUp = useSelector(authSelectors.isSignedUp);
     const onSubmit = data => dispatch(authOperations.signIn(data.username, data.password));
     const { t } = useTranslation(['form']);
     const {  
@@ -54,7 +55,7 @@ export default function SignIn() {
     
     return (
         <Container maxWidth="xs">
-            { isSignedIn ? <Redirect to="/" /> : null }
+            { isSignedIn && <Redirect to="/" /> }
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
                     <LockOutlinedIcon />
@@ -116,17 +117,19 @@ export default function SignIn() {
                     >
                         {t('form:signin.title')}
                     </Button>
-                    <Grid container justify="flex-end">
-                        <Grid item>
-                            <Link
-                                component={RouterLink} 
-                                to="/signup"
-                                variant="body2"
-                            >
-                                {t('form:signin.sign_up_instead')}
-                            </Link>
+                    { !isSignedUp &&
+                        <Grid container justify="flex-end">
+                            <Grid item>
+                                <Link
+                                    component={RouterLink} 
+                                    to="/signup"
+                                    variant="body2"
+                                >
+                                    {t('form:signin.sign_up_instead')}
+                                </Link>
+                            </Grid>
                         </Grid>
-                    </Grid>
+                    }
                 </form>
             </div>
         </Container>

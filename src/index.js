@@ -47,6 +47,17 @@ const store = createStore(
     storeEnhancers
 );
 
+// Setup Rails Axios to handle errors globally
+const { dispatch } = store;
+railsAxios.interceptors.response.use((response) => response, (error) => {
+    if (error.response) {
+        const errorData = error.response.data.error;
+        dispatch(alertActions.error(errorData.title, errorData.detail));
+    } else {
+        dispatch(alertActions.networkError());
+    }
+});
+
 ReactDOM.render(
     <I18nextProvider i18n={i18next}>
         <Provider store={store}>
@@ -60,10 +71,3 @@ ReactDOM.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
-
-// Setup Rails Axios to handle errors globally
-const { dispatch } = store;
-railsAxios.interceptors.response.use((response) => response, (error) => {
-    const errorData = error.response.data.error;
-    dispatch(alertActions.error(errorData.title, errorData.detail));
-});

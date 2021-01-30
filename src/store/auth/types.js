@@ -1,3 +1,5 @@
 const prefix = type => `AUTH.${type}`;
 
-export const SIGNED_IN = prefix('SIGNED_IN');
+export const SIGN_IN = prefix('SIGN_IN');
+export const SIGN_OUT = prefix('SIGN_OUT');
+export const SIGN_UP = prefix('SIGN_UP');

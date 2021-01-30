@@ -2,17 +2,29 @@ import * as types from './types';
 
 const initialState = {
     isSignedIn: false,
-    user: null
+    isSignedUp: false
 };
 
 const authReducer = (state = initialState, action) => {
     switch(action.type) {
-        case types.SIGNED_IN:
+        case types.SIGN_IN:
             return {
                 ...state,
                 isSignedIn: true,
-                user: action.user
-            }
+                isSignedUp: true
+            };
+        case types.SIGN_OUT:
+            return {
+                ...state,
+                isSignedIn: false,
+                isSignedUp: false
+            };
+        case types.SIGN_UP:
+            return {
+                ...state,
+                isSignedIn: false,
+                isSignedUp: true
+            };
         default:
             return state;
     }

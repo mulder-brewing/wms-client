@@ -1,6 +1,11 @@
 {
     "success": {
-        "signed_in": "Signed in successfully!",
         "signed_up": "Signed up successfully!  Please sign in."
+    },
+    "error": {
+        "network_error": {
+            "title": "Network Error",
+            "message": "Cannot contact server.  Please try again."
+        }
     }
 }

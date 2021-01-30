@@ -1,3 +1,5 @@
+import i18next from 'i18next';
+
 import * as types from './types';
 
 const default_alert = (severity, title, message) => ({
@@ -44,6 +46,8 @@ export const close = () => ({
 });
 
 export const error = (title, message) => default_alert('error', title, message);
+
+export const networkError = () => error(i18next.t('alert:error.network_error.title'), i18next.t('alert:error.network_error.message'));
 
 export const success = (title, message) => success_alert(title, message);
 
