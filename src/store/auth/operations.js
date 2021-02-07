@@ -15,6 +15,7 @@ export const authCheck = async dispatch => {
             dispatch(signOut);
         }
     }
+    dispatch(actions.authCheckEnd());
 }
 
 export const signIn = (username, password) => async dispatch => {

@@ -3,7 +3,8 @@
         "auth": {
             "username": "Username",
             "password": "Password"
-        }
+        },
+        "email": "Email"
     },
     "signin": {
         "sign_up_instead": "Don't have an account? Sign Up",
@@ -18,6 +19,7 @@
         }
     },
     "validation": {
+        "email": "Please enter a valid email address",
         "minLength": "Must be at least {{minLength}} characters"
     }
 }

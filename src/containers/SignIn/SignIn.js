@@ -40,9 +40,9 @@ const useStyles = makeStyles((theme) => ({
 export default function SignIn() {
     const classes = useStyles();
     const dispatch = useDispatch();
+    const isCheckingAuth = useSelector(authSelectors.isCheckingAuth);
     const isSignedIn = useSelector(authSelectors.isSignedIn);
     const isSignedUp = useSelector(authSelectors.isSignedUp);
-    const onSubmit = data => dispatch(authOperations.signIn(data.username, data.password));
     const { t } = useTranslation(['form']);
     const {  
         errors, 
@@ -52,6 +52,12 @@ export default function SignIn() {
     } = useForm({
         mode: 'onChange'
     });
+
+    if (isCheckingAuth) {
+        return null;
+    }
+
+    const onSubmit = data => dispatch(authOperations.signIn(data.username, data.password));
     
     return (
         <Container maxWidth="xs">

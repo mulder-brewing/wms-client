@@ -1,12 +1,18 @@
 import * as types from './types';
 
 const initialState = {
+    isCheckingAuth: true,
     isSignedIn: false,
     isSignedUp: false
 };
 
 const authReducer = (state = initialState, action) => {
     switch(action.type) {
+        case types.AUTH_CHECK_END:
+            return {
+                ...state,
+                isCheckingAuth: false
+            };
         case types.SIGN_IN:
             return {
                 ...state,

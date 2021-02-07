@@ -1,5 +1,9 @@
 import * as types from './types';
 
+export const authCheckEnd = () => ({
+    type: types.AUTH_CHECK_END
+});
+
 export const signIn = () => ({
     type: types.SIGN_IN
 });

@@ -58,7 +58,8 @@ const SignUp = () => {
         user: {
             username: data.username,
             password: data.password
-        }
+        },
+        email: data.email
     }));
 
     return (
@@ -96,6 +97,26 @@ const SignUp = () => {
                                 label={t('form:signup.company')}
                                 name="company_name"
                                 required
+                                variant="outlined"
+                            />
+                        </Grid>
+                        <Grid item>
+                            <TextField
+                                error={!!errors.email}
+                                fullWidth
+                                helperText={errors.email && errors.email.message}
+                                inputProps={{ maxLength: 255 }}
+                                inputRef={register({
+                                    pattern: {
+                                        value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                                        message: t('form:validation.email')
+                                    },
+                                    required: true
+                                })}
+                                label={t('form:shared.email')}
+                                name="email"
+                                required
+                                type="email"
                                 variant="outlined"
                             />
                         </Grid>
