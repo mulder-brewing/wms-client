@@ -1,6 +1,9 @@
 {
     "success": {
-        "signed_up": "Signed up successfully!  Please sign in."
+        "emailValidatedTitle": "Email validated!",
+        "emailValidatedMessage": "Please sign in.",
+        "signedUpTitle": "Signed up successfully!",
+        "signedUpMessage": "Check your email for a token."
     },
     "error": {
         "network_error": {

@@ -10,8 +10,9 @@ import AuthCheck from './components/AuthCheck';
 import Home from './containers/Home/Home';
 import SignedInRoute from './components/Routing/SignedInRoute';
 import SignedOutRoute from './components/Routing/SignedOutRoute';
-import SignIn from './containers/SignIn/SignIn';
-import SignUp from './containers/SignUp/SignUp';
+import SignIn from './containers/SignIn';
+import SignUp from './containers/SignUp';
+import ValidateEmail from './containers/ValidateEmail';
 
 function App() {
     return (
@@ -23,8 +24,9 @@ function App() {
                 <AuthCheck />
                 <Switch>
                     <SignedInRoute exact path="/" component={Home} />
-                    <SignedOutRoute path="/signup" component={SignUp} />
-                    <SignedOutRoute path="/signin" component={SignIn} />
+                    <SignedOutRoute exact path="/sign-up" component={SignUp} />
+                    <SignedOutRoute exact path="/validate-email" component={ValidateEmail} />
+                    <SignedOutRoute exact path="/sign-in" component={SignIn} />
                 </Switch>
             </div>
         </Router>

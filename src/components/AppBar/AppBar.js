@@ -69,11 +69,11 @@ const MyAppBar = () => {
             <List>
                 <SignedOutDrawerLink 
                     textkey="menu.sign_in"
-                    to="/signin"
+                    to="/sign-in"
                 />
                 <SignedOutDrawerLink 
                     textkey="menu.sign_up"
-                    to="/signup"
+                    to="/sign-up"
                 />
                 <SignedInDrawerLink
                     textkey="menu.home" 

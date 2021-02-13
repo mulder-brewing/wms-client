@@ -34,6 +34,19 @@ export const signOut = dispatch => {
 export const signUp = postData => async dispatch => {
     if (await api.signUp(postData)) {
         dispatch(actions.signUp());
-        dispatch(alertActions.success(i18next.t('alert:success.signed_up'), null));
+        dispatch(alertActions.success(
+            i18next.t('alert:success.signedUpTitle'), 
+            i18next.t('alert:success.signedUpMessage')
+        ));
+    }
+}
+
+export const validateEmail = postData => async dispatch => {
+    if (await api.validateEmail(postData)) {
+        dispatch(actions.emailValid());
+        dispatch(alertActions.success(
+            i18next.t('alert:success.emailValidatedTitle'), 
+            i18next.t('alert:success.emailValidatedMessage')
+        ));
     }
 }

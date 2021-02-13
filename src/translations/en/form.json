@@ -18,6 +18,10 @@
             "password_complexity": "Must contain at least one each of [a-z], [A-Z], [0-9], and [!@#$%^&*]"
         }
     },
+    "validateEmail": {
+        "title": "Validate Email",
+        "token": "Token"
+    },
     "validation": {
         "email": "Please enter a valid email address",
         "minLength": "Must be at least {{minLength}} characters"

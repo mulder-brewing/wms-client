@@ -16,3 +16,7 @@ export const signUp = () => ({
     type: types.SIGN_UP
 });
 
+export const emailValid = () => ({
+    type: types.EMAIL_VALID
+});
+

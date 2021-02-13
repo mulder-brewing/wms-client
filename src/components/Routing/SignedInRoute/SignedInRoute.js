@@ -12,7 +12,7 @@ const SignedInRoute = ({ component: Component, ...rest }) => {
             render={ props => 
                 isSignedIn ?
                     <Component {...props} /> :
-                    <Redirect to="/signin" />
+                    <Redirect to="/sign-in" />
             } 
         />
     );

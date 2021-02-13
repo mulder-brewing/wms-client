@@ -41,6 +41,7 @@ export default function SignIn() {
     const classes = useStyles();
     const dispatch = useDispatch();
     const isCheckingAuth = useSelector(authSelectors.isCheckingAuth);
+    const isEmailConfirmed = useSelector(authSelectors.isEmailValidated);
     const isSignedIn = useSelector(authSelectors.isSignedIn);
     const isSignedUp = useSelector(authSelectors.isSignedUp);
     const { t } = useTranslation(['form']);
@@ -123,19 +124,35 @@ export default function SignIn() {
                     >
                         {t('form:signin.title')}
                     </Button>
-                    { !isSignedUp &&
-                        <Grid container justify="flex-end">
+                    <Grid 
+                        container
+                        direction="column"
+                        alignItems="flex-end"
+                        spacing={2}
+                    >
+                        { !isSignedUp &&
                             <Grid item>
                                 <Link
                                     component={RouterLink} 
-                                    to="/signup"
+                                    to="/sign-up"
                                     variant="body2"
                                 >
                                     {t('form:signin.sign_up_instead')}
                                 </Link>
                             </Grid>
-                        </Grid>
-                    }
+                        }
+                        { !isEmailConfirmed &&
+                            <Grid item>
+                                <Link
+                                    component={RouterLink} 
+                                    to="/validate-email"
+                                    variant="body2"
+                                >
+                                    {t('form:validateEmail.title')}
+                                </Link>
+                            </Grid>
+                        }
+                    </Grid>
                 </form>
             </div>
         </Container>

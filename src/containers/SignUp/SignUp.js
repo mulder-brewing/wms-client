@@ -47,7 +47,7 @@ const SignUp = () => {
     } = useForm({
         mode: 'onChange'
     });
-    const { t } = useTranslation(['alert', 'form']);
+    const { t } = useTranslation('form');
     const dispatch = useDispatch();
     const isSignedUp = useSelector(authSelectors.isSignedUp);
 
@@ -64,7 +64,7 @@ const SignUp = () => {
 
     return (
         <Container maxWidth="xs">
-            { isSignedUp && <Redirect to="/signin" /> }
+            { isSignedUp && <Redirect to="/validate-email" /> }
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
                     <LockOutlinedIcon />
@@ -173,7 +173,7 @@ const SignUp = () => {
                         <Grid item>
                             <Link 
                                 component={RouterLink}
-                                to="/signin" 
+                                to="/sign-in" 
                                 variant="body2"
                             >
                                 {t('form:signup.sign_in_instead')}
